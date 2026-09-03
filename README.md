@@ -1,16 +1,67 @@
-# React + Vite
+# 🎬 Movie Search App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive movie search web application built with **React.js** that allows users to search for movies, explore results, and view detailed information about individual movies.
 
-Currently, two official plugins are available:
+The application uses a movie API to fetch real-time movie data and provides a clean, user-friendly interface for discovering movies.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Demo
 
-## React Compiler
+🔗 [View Live Demo](YOUR_DEPLOYED_LINK)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📸 Preview
 
-## Expanding the ESLint configuration
+![Movie Search App](./public/preview.png)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- 🔍 Search movies by title
+- 🎬 Display movies in a responsive grid
+- 🖼️ Movie posters with fallback images
+- ⭐ Display movie ratings and basic information
+- 📄 Dedicated movie details page
+- 🔗 Client-side navigation using React Router
+- 📱 Fully responsive design
+- ⚡ Fast performance with Vite
+- 🎨 Clean and modern UI
+- ❌ Handles movies with unavailable poster images
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| React.js | Building the user interface |
+| Vite | Development and build tool |
+| JavaScript | Application logic |
+| React Router | Page navigation and routing |
+| Tailwind CSS | Styling and responsive design |
+| REST API | Fetching movie data |
+| Git & GitHub | Version control |
+
+## 📂 Project Structure
+
+```text
+movie-search/
+│
+├── public/
+│   └── image.png
+│
+├── src/
+│   ├── components/
+│   │   ├── MovieCard/
+│   │   ├── MovieGrid/
+│   │   └── Navbar/
+│   │
+│   ├── pages/
+│   │   ├── Home/
+│   │   │   └── Home.jsx
+│   │   │
+│   │   └── MovieDetails/
+│   │       └── MovieDetails.jsx
+│   │
+│   ├── App.jsx
+│   ├── App.css
+│   └── main.jsx
+│
+├── package.json
+├── vite.config.js
+└── README.md
