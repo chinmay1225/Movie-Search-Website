@@ -6,7 +6,7 @@ The application uses a movie API to fetch real-time movie data and provides a cl
 
 ## 🚀 Live Demo
 
-🔗 [View Live Demo](YOUR_DEPLOYED_LINK)
+🔗 [View Live Demo](https://cinsearch-website-ten.vercel.app/)
 
 ## 📸 Preview
 
