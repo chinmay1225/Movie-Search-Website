@@ -13,3 +13,16 @@ export const searchMovies = async (query) => {
 
   return data;
 };
+
+export const getMovieDetails = async (id) => {
+  const url = `https://www.omdbapi.com/?apikey=${API_KEY}&i=${id}&plot=full`;
+
+  const response = await fetch(url);
+
+  if(!response.ok){
+    throw new Error("Failed to fetch the movie details");
+  }
+
+  const data = await response.json();
+  return data;
+}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import Navbar from "../../components/Navbar";
 import SearchBar from "../../components/SearchBar";
@@ -7,16 +7,43 @@ import MovieCard from "../../components/MovieCard";
 import MovieGrid from "../../components/MovieGrid";
 
 function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [movies, setMovies] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(() => {
+    return localStorage.getItem("searchQuery") || "";
+  });
+  const [movies, setMovies] = useState(() => {
+    const savedMovies = localStorage.getItem("movies");
+    return savedMovies ? JSON.parse(savedMovies) : [];
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [favourites, setFavourites] = useState(() => {
+    const savedFavourites = localStorage.getItem("favourites");
+
+    return savedFavourites ? JSON.parse(savedFavourites) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+  }, [favourites]);
+
+  const handleFavourite = (movie) => {
+    setFavourites((prev) => {
+      const alreadyFavourite = prev.some((fav) => fav.imdbID === movie.imdbID);
+
+      if (alreadyFavourite) {
+        return prev.filter((fav) => fav.imdbID !== movie.imdbID);
+      }
+
+      return [...prev, movie];
+    });
+  };
 
   const handleSearch = async (query) => {
     setSearchQuery(query);
     setLoading(true);
     setError("");
 
+    localStorage.setItem("searchQuery", query);
     try {
       const data = await searchMovies(query);
 
@@ -27,6 +54,7 @@ function Home() {
       }
 
       setMovies(data.Search || []);
+      localStorage.setItem("movies", JSON.stringify(data.Search || []));
     } catch (error) {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -42,7 +70,11 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
-      <Navbar />
+      <MovieGrid
+        movies={movies}
+        onFavourite={handleFavourite}
+        favourites={favourites}
+      />
 
       <main className="pt-16">
         <SearchBar

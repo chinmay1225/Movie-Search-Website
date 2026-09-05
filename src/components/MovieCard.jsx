@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-function MovieCard({ movie }) {
+function MovieCard({ movie, onFavourite, isFavourite }) {
   const [poster, setPoster] = useState(
     movie.Poster !== "N/A" ? movie.Poster : "/image.png"
   );
+
+  function handleFavourite(e) {
+    e.preventDefault();
+    onFavourite(movie);
+  }
 
   return (
     <Link
@@ -25,9 +30,19 @@ function MovieCard({ movie }) {
           {movie.Title}
         </h3>
 
-        <p className="mt-1 text-sm text-gray-400">
-          {movie.Year}
-        </p>
+        <div className="flex items-center justify-between">
+          <p className="mt-1 text-sm text-gray-400">
+            {movie.Year}
+          </p>
+
+          <button
+            type="button"
+            className="cursor-pointer text-xl"
+            onClick={handleFavourite}
+          >
+            {isFavourite ? "❤️" : "🤍"}
+          </button>
+        </div>
       </div>
     </Link>
   );
