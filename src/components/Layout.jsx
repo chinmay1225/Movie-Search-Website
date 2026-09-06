@@ -1,17 +1,17 @@
-import React from 'react'
-import Navbar from './Navbar'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
 
-function Layout() {
+function Layout({ favourites }) {
   return (
-    <div className='min-h-screen bg-gray-950 text-white'>
-        <Navbar />
-        
-        <main className='pt-16'>
-            <Outlet />
-        </main>
+    <div className="min-h-screen bg-gray-950 text-white">
+      <Navbar favouriteCount={favourites.length} />
+
+      <main className="pt-16">
+        <Outlet />
+      </main>
     </div>
-  )
+  );
 }
 
 export default Layout;

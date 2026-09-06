@@ -6,45 +6,54 @@ function MovieCard({ movie, onFavourite, isFavourite }) {
     movie.Poster !== "N/A" ? movie.Poster : "/image.png"
   );
 
-  function handleFavourite(e) {
+  const handleFavourite = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     onFavourite(movie);
-  }
+  };
 
   return (
-    <Link
-      to={`/movie/${movie.imdbID}`}
-      className="group block overflow-hidden rounded-xl border border-gray-800 bg-gray-900 transition hover:-translate-y-1 hover:border-gray-700 hover:shadow-xl"
-    >
-      <div className="aspect-[2/3] overflow-hidden bg-gray-800">
-        <img
-          src={poster}
-          alt={movie.Title}
-          onError={() => setPoster("/image.png")}
-          className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-        />
+    <div className="group overflow-hidden rounded-xl border border-gray-800 bg-gray-900 transition hover:-translate-y-1 hover:border-gray-700 hover:shadow-xl">
+
+      <div className="relative aspect-[2/3] overflow-hidden bg-gray-800">
+
+        <Link to={`/movie/${movie.imdbID}`}>
+          <img
+            src={poster}
+            alt={movie.Title}
+            onError={() => setPoster("/image.png")}
+            className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+          />
+        </Link>
+
+        <button
+          type="button"
+          onClick={handleFavourite}
+          aria-label={
+            isFavourite
+              ? "Remove from favourites"
+              : "Add to favourites"
+          }
+          className="absolute right-2 top-2 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-xl backdrop-blur transition hover:scale-110"
+        >
+          {isFavourite ? "❤️" : "🤍"}
+        </button>
+
       </div>
 
-      <div className="p-4">
-        <h3 className="truncate text-lg font-semibold text-white">
-          {movie.Title}
-        </h3>
+      <Link to={`/movie/${movie.imdbID}`}>
+        <div className="p-4">
+          <h3 className="truncate text-base font-semibold text-white sm:text-lg">
+            {movie.Title}
+          </h3>
 
-        <div className="flex items-center justify-between">
           <p className="mt-1 text-sm text-gray-400">
             {movie.Year}
           </p>
-
-          <button
-            type="button"
-            className="cursor-pointer text-xl"
-            onClick={handleFavourite}
-          >
-            {isFavourite ? "❤️" : "🤍"}
-          </button>
         </div>
-      </div>
-    </Link>
+      </Link>
+
+    </div>
   );
 }
 
